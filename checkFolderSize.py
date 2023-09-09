@@ -1,12 +1,12 @@
 import os
 
 
-def checkFolder(filename, dir, size):
+def checkFolder(dir, size):
     try:
         for filename in os.listdir(dir):
             fullDir = os.path.join(dir, filename)
             if os.path.isdir(fullDir):
-                size += checkFolder(filename, fullDir, 0)
+                size += checkFolder(fullDir, 0)
             else:
                 size += os.path.getsize(fullDir)
     except Exception as inst:
@@ -18,12 +18,12 @@ def checkFolder(filename, dir, size):
 directorySize = {}
 
 # get directory sizes and add them to a dictionary
-dir = 'C:\\'
+dir = 'C:\\Program Files'
 for filename in os.listdir(dir): 
     size = 0
     fullDir = os.path.join(dir, filename)
     if os.path.isdir(fullDir):
-        size += checkFolder(filename, fullDir, 0)
+        size += checkFolder(fullDir, 0)
     else:
         size += os.path.getsize(fullDir)
     directorySize[filename] = size
